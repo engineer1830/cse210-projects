@@ -1,5 +1,7 @@
 using System;
 
+// I have added a couple of enhancements to this program.  First, I added additional prompts beyond those suggested by the program.  I also added the feature to report when the last entry was recorded when a file is loaded.
+
 class Program
 {
     static void Main(string[] args)
@@ -46,6 +48,17 @@ class Program
                 Console.WriteLine("Enter filename:");
                 string filename = Console.ReadLine();
                 journal.LoadFromFile(filename);
+
+                DateTime lastDate = journal.GetLastEntryDate();
+
+                if (lastDate == DateTime.MinValue)
+                {
+                    Console.WriteLine("No entries found in this journal.");
+                }
+                else
+                {
+                    Console.WriteLine($"Last entry recorded on: {lastDate.ToShortDateString()}");
+                }
             }
             if (choice == "5") break;
         }

@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Collections.Generic;
 
 public class Journal
 {
@@ -46,5 +48,26 @@ public class Journal
             _entries.Add(entry);
         }
     }
+
+    public DateTime GetLastEntryDate()
+    {
+        if (_entries.Count == 0)
+        {
+            return DateTime.MinValue; // signals "no entries"
+        }
+
+        DateTime latest = DateTime.MinValue;
+
+        foreach (JournalEntry entry in _entries)
+        {
+            if (entry._date > latest)
+            {
+                latest = entry._date;
+            }
+        }
+
+        return latest;
+    }
+
 
 }
